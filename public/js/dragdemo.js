@@ -61,26 +61,20 @@ document.addEventListener("readystatechange", function(e) {
 
   function uploadFile(e) {
     var filename = e.dataTransfer.files[0].name
-    var fr = new FileReader()
 
-    fr.onload = (function(frEvent) {
-      // Pack into form data
-      formData = new FormData(filename, frEvent.target.result)
+    formData = new FormData()
+    formData.append(filename, e.dataTransfer.files[0], filename)
 
-      // POST to /upload
-      request
-        .post('/upload')
-        .send(formData)
-        .end(function(err, res) {
-          if(err)
-            console.log(err)
+    // POST to /upload
+    request
+      .post('/upload')
+      .send(formData)
+      .end(function(err, res) {
+        if(err)
+          console.log(err)
 
-          console.log(res)
-        })
-    })
-
-    fr.readAsBinaryString(e.dataTransfer.files[0])
-
+        console.log(res)
+      })
 
    }
 
