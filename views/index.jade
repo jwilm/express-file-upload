@@ -15,7 +15,6 @@ html
         border-color: #999999;
       }
 
-    script(type="text/javascript",src="/js/superagent.js")
     script(type="text/javascript",src="//code.jquery.com/jquery-1.10.1.min.js")
     script(type="text/javascript",src="/js/dragdemo.js")
 
@@ -23,3 +22,8 @@ html
     h1 Express File Upload
     p Drop a file here
     div#drop-zone
+
+    h2 Uploaded Files
+    each val, index in files
+      p
+        a(href="#{index}") #{val}

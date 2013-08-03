@@ -1,5 +1,3 @@
-var request = superagent
-
 document.addEventListener("readystatechange", function(e) {
   if(document.readyState != "complete")
     return
@@ -62,19 +60,24 @@ document.addEventListener("readystatechange", function(e) {
   function uploadFile(e) {
     var filename = e.dataTransfer.files[0].name
 
-    formData = new FormData()
-    formData.append(filename, e.dataTransfer.files[0], filename)
+    data = new FormData()
+    data.append(filename, e.dataTransfer.files[0], filename)
 
     // POST to /upload
-    request
-      .post('/upload')
-      .send(formData)
-      .end(function(err, res) {
-        if(err)
-          console.log(err)
-
-        console.log(res)
-      })
+    $.ajax({
+      url: '/upload',
+      data: data,
+      cache: false,
+      contentType: false,
+      processData: false,
+      type: 'POST',
+      success: function(data){
+        var $body = $("body")
+        for(var key in data) {
+          $body.append(['<p><a href="',data[key],'">',key,'</a></p>'].join(''))
+        }
+      }
+    })
 
    }
 

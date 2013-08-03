@@ -13,7 +13,7 @@ app.set('views',__dirname + '/views')
 app.set('view engine', 'jade')
 
 /* Required for our demo */
-app.use(express.bodyParser({uploadDir: __dirname + "/public", keepExtensions: true}))
+app.use(express.bodyParser({uploadDir: __dirname + "/public/files", keepExtensions: true}))
 
 /* router */
 app.use(app.router)
@@ -25,9 +25,14 @@ app.use(express.static(__dirname + '/public'))
 app.use(express.favicon())
 app.use(express.errorHandler())
 
-/* Mount a single page at / */
+/* Storage for name/path map */
+filemap = {}
+
+/* Mount a single page at / 
+ * Render a list of uploaded files
+ */
 app.get('/', function(req, res) {
-  res.render('index')
+  res.render('index', {files: filemap})
 })
 
 /* Uploads will be sent here */
@@ -37,7 +42,9 @@ app.post('/upload', function(req, res) {
   var confirmation = {}
   for(var key in req.files)
   {
-    confirmation[key] = req.files[key].path.replace(__dirname, "")
+    var relPath = req.files[key].path.replace(__dirname + "/public", "")
+    filemap[relPath] = key
+    confirmation[key] = relPath
   }
 
   res.json(confirmation)
