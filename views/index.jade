@@ -1,0 +1,24 @@
+doctype 5
+html
+  head
+    title Express File Upload
+    style.
+      #drop-zone {
+        height: 300px;
+        width: 300px;
+        background-color: #dddddd;
+        border-radius: 5px;
+        border: 1px solid #aaaaaa;
+      }
+      #drop-zone.drag-hover {
+        background-color: #bbbbbb;
+        border-color: #999999;
+      }
+
+    script(type="text/javascript",src="/js/superagent.js")
+    script(type="text/javascript",src="/js/dragdemo.js")
+
+  body
+    h1 Express File Upload
+    p Drop a file here
+    div#drop-zone

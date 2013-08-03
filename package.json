@@ -1,0 +1,22 @@
+{
+  "name": "express-file-upload",
+  "version": "0.1.0",
+  "author": "Joe Wilm <jdwilm@gmail.com>",
+  "description": "A demonstation of uploading files with express",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "main": "./lib/http-server",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jwilm/express-file-upload-demo.git"
+  },
+  "dependencies" : {
+    "express":  "*",
+    "jade": "*"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.10"
+  }
+}
